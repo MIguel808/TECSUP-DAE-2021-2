@@ -15,12 +15,17 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path,include
 from django.http import HttpResponse
-def home (request):
-    return HttpResponse("<h1>Hola mundo</h1>")
+from CALCULADORA.views import suma, resta, multiplicar
+def home(request):
+    return HttpResponse("<h1>Hola Mundo</h1>")
 urlpatterns = [
     path('',home),
-    path('polls/', include('encuesta.urls')),
+    path('polls/',include('encuesta.urls')),
+    path('app/',include('Calculos.urls')),
+    path('app/suma/<int:calculo_id>/<int:calculo2_id>',suma),
+    path('app/resta/<int:calculo_id>/<int:calculo2_id>',resta),
+    path('app/multiplica/<int:calculo_id>/<int:calculo2_id>',multiplicar),
     path('admin/', admin.site.urls),
 ]
